@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Interactive Form</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 0;
+            background: linear-gradient(120deg, #89f7fe, #66a6ff);
+        }
+
+        .container {
+            width: 350px;
+            margin: 80px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            animation: fadeIn 1s ease;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #66a6ff;
+            transform: scale(1.05);
+        }
+
+        button {
+            width: 95%;
+            padding: 10px;
+            background: #66a6ff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #4a90e2;
+            transform: scale(1.05);
+        }
+
+        .preview {
+            font-size: 14px;
+            color: gray;
+            margin-top: 10px;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 12px;
+            background: #e0f7fa;
+            border-radius: 6px;
+            animation: slideUp 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+        }
+
+        @keyframes slideUp {
+            from {opacity:0; transform: translateY(20px);}
+            to {opacity:1; transform: translateY(0);}
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>🚀 User Form</h2>
+
+    <form action="/submit" method="POST">
+        <input type="text" id="name" name="name" placeholder="Enter your name" required oninput="updatePreview()">
+
+        <input type="email" id="email" name="email" placeholder="Enter your email" required oninput="updatePreview()">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- Live preview -->
+    <div class="preview">
+        <p id="previewText">Typing preview will appear here...</p>
+    </div>
+
+    <!-- Server response -->
+    <% if (name && email) { %>
+        <div class="result">
+            <h3>Welcome, <%= name %> 🎉</h3>
+            <p>Email: <%= email %></p>
+        </div>
+    <% } %>
+
+</div>
+
+<script>
+function updatePreview() {
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+
+    document.getElementById("previewText").innerText =
+        "Preview: " + name + " (" + email + ")";
+}
+</script>
+
+</body>
+</html>
